@@ -21,7 +21,7 @@ RESET   = '\033[39m'
 
 #Credits
 print(WHITE + "-------------------------------------------------------")
-print(CYAN +'''
+print(CYAN + '''
                 _        _                                     
      /\        | |      | |                                    
     /  \  _   _| |_ ___ | |__  _   _ _ __ ___  _ __   ___ _ __ 
@@ -31,10 +31,10 @@ print(CYAN +'''
                                               | |              
                                                       
 ''')
-print(WHITE+"-------------------------------------------------------")
+print(WHITE + "-------------------------------------------------------")
 print(GREEN + "[-] OGU Autobumper v1")
 print(GREEN + "[-] Developed by Penderdrill#0691")
-print(WHITE+"-------------------------------------------------------"+ CYAN)
+print(WHITE + "-------------------------------------------------------"+ CYAN)
 
 #Asking username, password, and thread
 username = input("[+] What's your username? ")
@@ -50,7 +50,6 @@ driver = uc.Chrome(options=opts, use_subprocess=True, version_main=102)
 driver.get("https://ogu.gg/login")
 email = driver.find_element(by=By.XPATH, value="/html/body/div[4]/div/form[1]/div/div[1]/div/div[2]/div/span/div[1]/span/label/input").send_keys(username)
 password = driver.find_element(by=By.XPATH, value="/html/body/div[4]/div/form[1]/div/div[1]/div/div[2]/div/span/div[2]/label/input").send_keys(password)
-time.sleep(2)
 button = driver.find_element(by=By.XPATH, value="/html/body/div[4]/div/form[1]/div/div[1]/div/div[2]/div/span/button/span").click()
 
 #Autobumping

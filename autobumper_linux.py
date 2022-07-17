@@ -55,13 +55,9 @@ for i in range(100000000):
     
     #Doing the actual bumping
     driver.get(thread)
-    try:
-        reply_box = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "message"))).send_keys("Bumping! https://discord.gg/gPTU7zq3br Contact me on discord for a faster response :D")
-    finally: 
-        try:   
-            post_reply = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()    
-        finally:
-            print(MAGENTA + f"[{current_time}] Autobump #" + str(i + 1))
+    reply_box = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "message"))).send_keys("Bumping! https://discord.gg/gPTU7zq3br Contact me on discord for a faster response :D")
+    post_reply = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()  
+    print(MAGENTA + f"[{current_time}] Autobump #" + str(i + 1))
     driver.set_page_load_timeout(1000)
     time.sleep(1860)    
     

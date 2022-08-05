@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
+from selenium.common.exceptions import TimeoutException
 
 #Colours
 CGREEN = '\33[92m'
@@ -39,15 +40,16 @@ options = uc.ChromeOptions()
 options.add_argument("--disable-extensions") 
 options.add_argument("--start-maximized")
 driver = uc.Chrome(options=options, use_subprocess=True, version_main=104) 
+driver.set_page_load_timeout(5000)
 
 #Logging in
 driver.get("https://ogu.gg/login")
-email = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div/form[1]/div/div[1]/div/div[2]/div/span/div[1]/span/label/input"))).send_keys(username)
-password = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div/form[1]/div/div[1]/div/div[2]/div/span/div[2]/label/input"))).send_keys(password)
-button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[4]/div/form[1]/div/div[1]/div/div[2]/div/span/button/span"))).click()
+email = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div/form[1]/div/div[1]/div/div[2]/div/span/div[1]/span/label/input"))).send_keys(username)
+password = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div/form[1]/div/div[1]/div/div[2]/div/span/div[2]/label/input"))).send_keys(password)
+button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div/form[1]/div/div[1]/div/div[2]/div/span/button"))).click()
+time.sleep(5)
 
-#Autobumping every 31 minutes
-for i in range(100000000):
+def autobump(thread):
 
     #Finding current date and time
     now = datetime.now()
@@ -55,9 +57,16 @@ for i in range(100000000):
     
     #Doing the actual bumping
     driver.get(thread)
-    reply_box = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "message"))).send_keys("Bumping! https://discord.gg/gPTU7zq3br Contact me on discord for a faster response :D")
-    post_reply = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()  
-    print(MAGENTA + f"[{current_time}] Autobump #" + str(i + 1))
-    driver.set_page_load_timeout(1000)
-    time.sleep(1860)    
+    reply_box = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "message"))).send_keys("Bumping! https://discord.gg/gPTU7zq3br Contact me on discord for a faster response :D #" + str(i + 1)) 
+    post_reply = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
+    print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)}")
+    time.sleep(1860)
+
+#Autobumping every 31 minutes
+for i in range(100000000):
+    try:
+        autobump(thread)
+    except TimeoutException:
+        time.sleep(120)
+        autobump(thread) 
     

@@ -5,13 +5,35 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
-from selenium.common.exceptions import TimeoutException
+from random import choice
+
+#Enter your username and password here (it's needed so you're able to login and post the autobump message)
+username = ""
+password = ""
 
 #Colours
 CGREEN = '\33[92m'
-BLUE    = '\033[34m'
+BLUE = '\033[34m'
 MAGENTA = '\033[35m'
-WHITE   = '\033[37m'
+WHITE = '\033[37m'
+
+#Selenium things (using undetected chromedriver so Cloudflare doesn't have a seizure)
+options = uc.ChromeOptions()
+options.add_argument("--disable-extensions") 
+options.add_argument("--start-maximized")
+driver = uc.Chrome(options=options, use_subprocess=True, version_main=105) 
+driver.set_page_load_timeout(2000)
+
+#Autobump a thread
+def autobump(thread, message):
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    driver.get(thread)
+    thread_title = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[8]/div[1]/div[2]/div[3]/span"))).text
+    thread_message = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "message"))).send_keys(f"{message} #{str(i + 1)}") 
+    reply_button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
+    print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)} ({thread_title})")
+    time.sleep(7)
 
 #Credits
 print(WHITE + "-----------------------------------------------------------------------")
@@ -30,18 +52,6 @@ print(BLUE + "[-] OGU Autobumper v2")
 print(BLUE + "[-] Developed by Penderdrill#0691")
 print(WHITE + "-----------------------------------------------------------------------")
 
-#Enter your username, password, and the thread you want bumped here!
-username = ""
-password = ""
-thread = ""
-
-#Selenium things (using undetected chromedriver so Cloudflare doesn't have a seizure)
-options = uc.ChromeOptions()
-options.add_argument("--disable-extensions") 
-options.add_argument("--start-maximized")
-driver = uc.Chrome(options=options, use_subprocess=True, version_main=104) 
-driver.set_page_load_timeout(5000)
-
 #Logging in
 driver.get("https://ogu.gg/login")
 email = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div/form[1]/div/div[1]/div/div[2]/div/span/div[1]/span/label/input"))).send_keys(username)
@@ -49,24 +59,20 @@ password = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XP
 button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[5]/div/form[1]/div/div[1]/div/div[2]/div/span/button"))).click()
 time.sleep(5)
 
-def autobump(thread):
-
-    #Finding current date and time
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    
-    #Doing the actual bumping
-    driver.get(thread)
-    reply_box = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "message"))).send_keys("Bumping! https://discord.gg/gPTU7zq3br Contact me on discord for a faster response :D #" + str(i + 1)) 
-    post_reply = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
-    print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)}")
-    time.sleep(1860)
-
 #Autobumping every 31 minutes
 for i in range(100000000):
-    try:
-        autobump(thread)
-    except TimeoutException:
-        time.sleep(120)
-        autobump(thread) 
+
+    """
+    
+    Put the threads you want to autobump here
+    The thread url comes first and then the message you want to be posted onto the thread
+    You can autobump as many threads as you want!
+    
+    """
+
+    #Examples
+    autobump("https://ogu.gg/Thread-NameMC-Followers-Automated-fast-and-cheap", "Autobumping!")
+    autobump("https://ogu.gg/Thread-1-PER-1000-FAST-AND-CHEAP", "Buy my credits!!")
+
+    time.sleep(1860)
     

@@ -3,14 +3,10 @@
 
 ## Table of Contents
 
-- [About](#about)
 - [Getting Started](#getting_started)
 - [Installing](#installing)
 - [Usage](#usage)
 - [Contributing](#contributing)
-
-## About
-A script for autobumping your thread(s) on OGU <3
 
 ## Getting Started
 It's recommended to run the script on a Linux distro or Linux VPS. The colours won't work on Windows and it also tends to crash after 1-2 autobumps.

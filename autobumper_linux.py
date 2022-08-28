@@ -29,10 +29,9 @@ def autobump(thread, message):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     driver.get(thread)
-    thread_title = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, "/html/body/div[8]/div[1]/div[2]/div[3]/span"))).text
     thread_message = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "message"))).send_keys(f"{message} #{str(i + 1)}") 
     reply_button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
-    print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)} ({thread_title})")
+    print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)}")
     time.sleep(7)
 
 #Credits

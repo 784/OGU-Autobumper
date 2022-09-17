@@ -1,13 +1,37 @@
 import time
-from selenium import *
-import undetected_chromedriver as uc
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
-from random import choice
+import random
+import os
 
-#Enter your username and password here (it's needed so you're able to login and post the autobump message)
+#Automatically importing external libraries that are needed for the program to run
+try:
+    from selenium import *
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+except ImportError:   
+    try:
+        os.system("pip install selenium")
+        from selenium import *
+        from selenium.webdriver.common.by import By
+        from selenium.webdriver.support.ui import WebDriverWait
+        from selenium.webdriver.support import expected_conditions as EC
+    except ImportError:
+        print("PIP failed to install Selenium! Make sure PIP is installed on your system.")
+        time.sleep(3)
+        exit()
+try:
+    import undetected_chromedriver as uc
+except ImportError:
+    try:
+        os.system("pip install undetected_chromedriver")
+        import undetected_chromedriver as uc
+    except ImportError:
+        print("PIP failed to install Undetected Chromedriver! Make sure PIP is installed on your system.")
+        time.sleep(3)
+        exit()
+
+#Enter your username and password here
 username = ""
 password = ""
 
@@ -17,22 +41,22 @@ BLUE = '\033[34m'
 MAGENTA = '\033[35m'
 WHITE = '\033[37m'
 
+#Autobump a thread
+def autobump(thread, message):
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    driver.get(thread)
+    thread_message = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "message"))).send_keys(f"{message} [{str(random.randint(1000, 9999))}]") 
+    reply_button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
+    print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)}")
+    time.sleep(7)
+
 #Selenium things (using undetected chromedriver so Cloudflare doesn't have a seizure)
 options = uc.ChromeOptions()
 options.add_argument("--disable-extensions") 
 options.add_argument("--start-maximized")
 driver = uc.Chrome(options=options, use_subprocess=True, version_main=105) 
 driver.set_page_load_timeout(2000)
-
-#Autobump a thread
-def autobump(thread, message):
-    now = datetime.now()
-    current_time = now.strftime("%H:%M:%S")
-    driver.get(thread)
-    thread_message = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "message"))).send_keys(f"{message} #{str(i + 1)}") 
-    reply_button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
-    print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)}")
-    time.sleep(7)
 
 #Credits
 print(WHITE + "-----------------------------------------------------------------------")
@@ -47,7 +71,7 @@ Y88b. .d88P Y88b  d88P Y88b. .d88P
  "Y88888P"   "Y8888P88  "Y88888P"                                                        
 ''')
 print(WHITE + "-----------------------------------------------------------------------")
-print(BLUE + "[-] OGU Autobumper v2")
+print(BLUE + "[-] OGU Autobumper v3")
 print(BLUE + "[-] Developed by Penderdrill#0691")
 print(WHITE + "-----------------------------------------------------------------------")
 
@@ -60,7 +84,7 @@ time.sleep(5)
 
 #Autobumping every 31 minutes
 for i in range(100000000):
-
+    
     """
     
     Put the threads you want to autobump here
@@ -74,4 +98,3 @@ for i in range(100000000):
     autobump("https://ogu.gg/Thread-1-PER-1000-FAST-AND-CHEAP", "Buy my credits!!")
 
     time.sleep(1860)
-    

@@ -41,8 +41,8 @@ BLUE = '\033[34m'
 MAGENTA = '\033[35m'
 WHITE = '\033[37m'
 
-#Autobump a thread
-def autobump(thread, message):
+#Autobump function
+def autobump(thread, message = "Autobumped using Penderdrill's autobumper"):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     driver.get(thread)
@@ -87,14 +87,17 @@ for i in range(100000000):
     
     """
     
-    Put the threads you want to autobump here
+    Put the threads you want to autobump below the quotation marks (MAKE SURE TO INDENT THE AUTOBUMP FUNCTION! Spacing is important in Python)
     The thread url comes first and then the message you want to be posted onto the thread
     You can autobump as many threads as you want!
     
     """
 
-    #Examples
+    #Examples with a custom thread message
     autobump("https://ogu.gg/Thread-NameMC-Followers-Automated-fast-and-cheap", "Autobumping!")
     autobump("https://ogu.gg/Thread-1-PER-1000-FAST-AND-CHEAP", "Buy my credits!!")
-
+    
+    #If you don't want a custom message, just put your thread link and it'll use "Autobumped using Penderdrill's autobumper" as the message (example below)
+    autobump("https://ogu.gg/Thread-NameMC-Followers-Automated-fast-and-cheap")
+    
     time.sleep(1860)

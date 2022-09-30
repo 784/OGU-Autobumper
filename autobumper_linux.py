@@ -9,24 +9,24 @@ try:
     from selenium.webdriver.common.by import By
     from selenium.webdriver.support.ui import WebDriverWait
     from selenium.webdriver.support import expected_conditions as EC
-except ImportError:   
+except ModuleNotFoundError:   
     try:
         os.system("pip install selenium")
         from selenium import *
         from selenium.webdriver.common.by import By
         from selenium.webdriver.support.ui import WebDriverWait
         from selenium.webdriver.support import expected_conditions as EC
-    except ImportError:
+    except ModuleNotFoundError:
         print("PIP failed to install Selenium! Make sure PIP is installed on your system.")
         time.sleep(3)
         exit()
 try:
     import undetected_chromedriver as uc
-except ImportError:
+except ModuleNotFoundError:
     try:
         os.system("pip install undetected_chromedriver")
         import undetected_chromedriver as uc
-    except ImportError:
+    except ModuleNotFoundError:
         print("PIP failed to install Undetected Chromedriver! Make sure PIP is installed on your system.")
         time.sleep(3)
         exit()

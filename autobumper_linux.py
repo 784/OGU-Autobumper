@@ -55,7 +55,7 @@ def autobump(thread, message = "Autobumped using Penderdrill's autobumper"):
 options = uc.ChromeOptions()
 options.add_argument("--disable-extensions") 
 options.add_argument("--start-maximized")
-driver = uc.Chrome(options=options, use_subprocess=True, version_main=105) 
+driver = uc.Chrome(options=options, use_subprocess=True) 
 driver.set_page_load_timeout(2000)
 
 #Credits
@@ -97,7 +97,7 @@ for i in range(100000000):
     autobump("https://ogu.gg/Thread-NameMC-Followers-Automated-fast-and-cheap", "Autobumping!")
     autobump("https://ogu.gg/Thread-1-PER-1000-FAST-AND-CHEAP", "Buy my credits!!")
     
-    #If you don't want a custom message, just put your thread link and it'll use "Autobumped using Penderdrill's autobumper" as the message (example below)
+    #If you don't want a custom message, just put your thread link and it'll use "Autobumped using Penderdrill's autobumper" as the message
     autobump("https://ogu.gg/Thread-NameMC-Followers-Automated-fast-and-cheap")
     
     time.sleep(1860)

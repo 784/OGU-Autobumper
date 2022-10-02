@@ -9,7 +9,7 @@
 - [Contributing](#contributing)
 
 ## Getting Started
-It's recommended to run the script on a Linux desktop or Linux VPS. Also, make sure to have a GUI! The script opens an actual Chrome window which won't work if you don't have a desktop environment or standalone window manager installed. The colours won't work on Windows and it also tends to crash after 1-2 autobumps. Chrome version 104 or 105 is also recommended (if you're using a different version of Chrome, make sure to change version_main=105 to whatever your version actually is). Earlier versions of Chrome have issues with crashing. :D 
+It's recommended to run the script on a Linux desktop or Linux VPS. Also, make sure to have a GUI! The script opens an actual Chrome window which won't work if you don't have a desktop environment or standalone window manager installed. The colours won't work on Windows and it also tends to crash after 1-2 autobumps. Chrome version 104 or 105 is also recommended. Earlier versions of Chrome have issues with crashing. :D 
 
 ## Installing
 If you don't have Python already installed, you should download version 3.9 (https://www.python.org/downloads/). Once Python is installed, you're good to go! You no longer need to install the two external libraries, as those are installed automatically the first time you run the script now. 

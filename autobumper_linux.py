@@ -41,13 +41,15 @@ BLUE = '\033[34m'
 MAGENTA = '\033[35m'
 WHITE = '\033[37m'
 
-#Autobump function
+#Function to autobump a thread
 def autobump(thread, message = "Autobumped using Penderdrill's autobumper"):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     driver.get(thread)
-    thread_message = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "message"))).send_keys(f"{message} [{str(random.randint(1000, 9999))}]") 
-    reply_button = WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
+    time.sleep(5)
+    thread_message = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "message"))).send_keys(f"{message} [{str(random.randint(1000, 9999))}]") 
+    time.sleep(5)
+    reply_button = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "quick_reply_submit"))).click()     
     print(MAGENTA + f"[{current_time}] Autobump #{str(i + 1)}")
     time.sleep(7)
 

@@ -41,7 +41,6 @@ BLUE = '\033[34m'
 MAGENTA = '\033[35m'
 WHITE = '\033[37m'
 
-#Function to autobump a thread
 def autobump(thread, message = "Autobumped using Penderdrill's autobumper"):
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
